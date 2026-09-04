@@ -115,5 +115,116 @@ The creator of this program has chosen to use the following command for comilati
 ``` gcc -Wall -Wextra -g regression.c -o main -lm ```
 
 ## Derivation of Formulae
+Linear regression works by finding the line that best fits the data by using the least squares method. The least squares method consists of minimizing the sum of the squares of the errors. The error for each data point is defined as the vertical seperation (distance) from the line. 
+
+Mathematically, one can say that given a set of data $\phi(x)$ where for a given x value, the function $\phi$ returns the y value for that data point, the linear function that best approximates that data is a function $f(x) = mx + b$ where $m$ is the angular coefficient/slope and $b$ is the linear coefficient/intercept.
+
+Since the error for each data point is defined as the vertical distance between each data point and the line, the error is $|f(x) - \phi(x)|$. The least squares method requires the minimization of the sum of the squares of the error. Mathematically the function that must be minimized is: 
+
+$$
+\begin{aligned}
+&E = \sum_{k=1}^n [f(x_k) - \phi(x_k)]^2
+&E(m,b) = \sum_{k=1}^n [mx + b - y]^2
+$$
+\end{aligned}
+
+Where the function $E$ depends on $m$ and $b$, the coefficients of the line for which this program solves, and where $n$ is the number of data points.
+
+To minimize the function, the partial derivates with respect to the coefficients must be set equal to 0. 
+
+$$
+\begin{aligned}
+&\frac{\partial E}{\partial m} = 0
+&\frac{\partial E}{\partial b} = 0
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+&\frac{\partial E}{\partial m} = 2\sum_{k=1}^n [mx + b -y](x)
+&\frac{\partial E}{\partial b} = 2\sum_{k=1}^n [mx + b -y](1)
+\end{aligned}
+$$
+
+This results in the following system of linear equations: 
+
+$$
+\begin{aligned}
+&\sum_{k=1}^n mx^2 + \sum_{k=1}^n bx - \sum_{k=1}^n xy = 0
+&\sum_{k=1}^n mx + \sum_{k=1}^n b - \sum_{k=1}^n y = 0
+\end{aligned}
+$$
+
+Which simplifies to: 
+
+$$
+\begin{aligned}
+&m\sum_{k=1}^n x^2 + b\sum_{k=1}^n x = \sum_{k=1}^n xy
+&m\sum_{k=1}^n x + bn = \sum_{k=1}^n y
+\end{aligned}
+$$
+
+Which can be represented in Matrix form A$\vec{x}$ = b as: 
+
+$$
+\begin{pmatrix}
+\sum_{k=1}^n x^2 & \sum_{k=1}^n x \\
+\sum_{k=1}^n x & n
+\end{pmatrix}
+\begin{pmatrix}
+m \\
+b
+\end{pmatrix}
+=
+\begin{pmatrix}
+\sum_{k=1}^n xy\\
+\sum_{k=1}^n y
+\end{pmatrix}
+$$
+
+After applying the inverse matrix to both sides of the equation the following statemant can be made: 
+
+$$
+\begin{pmatrix}
+\m\\
+\b
+\end{pmatrix}
+=
+\frac{1}{n\sum{k=1}^n x^2 - (\sum{k=1}^n x)^2}
+\begin{pmatrix}
+\n & -\sum_{k=1}^n x \\
+-\sum_{k=1}^n x & \sum{k=1}^n x^2
+\end{pmatrix}
+\begin{pmatrix}
+\sum_{k=1}^n xy\\
+\sum_{k=1}^n y
+\end{pmatrix}
+$$
+
+After performing the Matrix times Vector product operation on the right side of the quation:
+
+$$
+\begin{pmatrix}
+\m\\
+\b
+\end{pmatrix}
+=
+\frac{1}{n\sum{k=1}^n x^2 - (\sum{k=1}^n x)^2}
+\begin{pmatrix}
+\n\sum_{k=1}^n xy & -\sum_{k=1}^n x \sum_{k=1}^n y \\
+-\sum_{k=1}^n x \sum_{k=1}^n xy & \sum{k=1}^n x^2 \sum_{k=1}^n y
+\end{pmatrix}
+$$
+
+Which finally results in the expressions for the angular and linear coefficients of the line: 
+
+$$ 
+\begin{aligned}
+m = \frac{n\sum{k=1}^n xy - \sum{k=1}^n x \sum{k=1}^n y}{n\sum{k=1}^n x^2 - (\sum{k=1}^n x)^2}
+b = \frac{\sum{k=1}^n x^2 \sum{k=1}^n y - \sum{k=1}^n x \sum{k=1}^n xy}{n\sum{k=1}^n x^2 - (\sum{k=1}^n x)^2}
+\end{aligned}
+$$
+
+In the code, after all the data has been loaded into memory, each of the sums is calculated first and the value for each is saved. Then the denominator is caculated seperately as it is the same for both coefficients. Then the final computation for each of the coefficients is made.
 
 ## Code Explaination
