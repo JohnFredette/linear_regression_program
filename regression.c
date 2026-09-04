@@ -24,15 +24,13 @@ int Manual_Data_Input(Coordinate **points);
 int CSV_Data_Input(char *filename, Coordinate **points);
 void print_data(Coordinate *points, int quantity);
 void calculate_sums( 
-    Coordinate *points, int quantity, double *sum_x, double *sum_y,
-    double *sum_x_squared, double *sum_y_squared, double *sum_xy);
+    Coordinate *points, int quantity, double *sum_x, double *sum_y, double *sum_x_squared,
+    double *sum_y_squared, double *sum_xy);
 void calculate_regression_results(
-    int quantity, double sum_x, double sum_y, double sum_x_squared,
-    double sum_y_squared, double sum_xy, double *slope, double *intercept,
-    double *correlation_coefficient);
+    int quantity, double sum_x, double sum_y, double sum_x_squared, double sum_y_squared,
+    double sum_xy, double *slope, double *intercept, double *correlation_coefficient);
 void print_sums(
-    double sum_x, double sum_y, double sum_x_squared, double sum_y_squared,
-    double sum_xy);
+    double sum_x, double sum_y, double sum_x_squared, double sum_y_squared, double sum_xy);
 void print_results(double slope, double intercept, double correlation_coefficient);
 int CSV_Data_Export(Coordinate *points, int quantity);
 
@@ -90,11 +88,10 @@ int main(int argc, char *argv[]) {
             case PRINT_SUMS:
                 if (status_of_calculation == NOT_CALCULATED){
                     calculate_sums(
-                        data, quantity, &sum_x, &sum_y, &sum_x_squared,
-                        &sum_y_squared, &sum_xy);
+                        data, quantity, &sum_x, &sum_y, &sum_x_squared, &sum_y_squared, &sum_xy);
                     calculate_regression_results(
-                        quantity, sum_x, sum_y, sum_x_squared, sum_y_squared,
-                        sum_xy, &slope, &intercept, &correlation_coefficient);
+                        quantity, sum_x, sum_y, sum_x_squared, sum_y_squared, sum_xy, &slope,
+                        &intercept, &correlation_coefficient);
                     
                     status_of_calculation = CALCULATED;
                 }
@@ -103,11 +100,10 @@ int main(int argc, char *argv[]) {
             case PRINT_RESULTS:
                 if (status_of_calculation == NOT_CALCULATED){
                     calculate_sums(
-                        data, quantity, &sum_x, &sum_y, &sum_x_squared,
-                        &sum_y_squared, &sum_xy);
+                        data, quantity, &sum_x, &sum_y, &sum_x_squared, &sum_y_squared, &sum_xy);
                     calculate_regression_results(
-                        quantity, sum_x, sum_y, sum_x_squared, sum_y_squared,
-                        sum_xy, &slope, &intercept, &correlation_coefficient);
+                        quantity, sum_x, sum_y, sum_x_squared, sum_y_squared, sum_xy, &slope,
+                        &intercept, &correlation_coefficient);
                     
                     status_of_calculation = CALCULATED;
                 }
@@ -186,7 +182,8 @@ int CSV_Data_Input(char *filename, Coordinate **points) {
             *points = temp;
         }
 
-        int scan_return = fscanf(file_pointer, "%lf , %lf", &(*points)[quantity].x, &(*points)[quantity].y);
+        int scan_return = fscanf(
+            file_pointer, "%lf , %lf", &(*points)[quantity].x, &(*points)[quantity].y);
         if (scan_return == 2){
             quantity++;
         }
@@ -206,14 +203,14 @@ int CSV_Data_Input(char *filename, Coordinate **points) {
 
 void print_data(Coordinate *points, int quantity) {
     for (int i = 0; i < quantity; i++) {
-    printf("%f, %f\n", points[i].x, points[i].y); 
+        printf("%f, %f\n", points[i].x, points[i].y); 
     }
     printf("\n");
 }
 
 void calculate_sums(
-    Coordinate *points, int quantity, double *sum_x, double *sum_y,
-    double *sum_x_squared, double *sum_y_squared, double *sum_xy){
+    Coordinate *points, int quantity, double *sum_x, double *sum_y, double *sum_x_squared,
+    double *sum_y_squared, double *sum_xy){
     
     *sum_x = 0;
     *sum_y = 0;
@@ -239,10 +236,12 @@ void calculate_regression_results(
     *intercept = (sum_y * sum_x_squared - sum_x * sum_xy) / denominator;
     
     *correlation_coefficient = (quantity * sum_xy - sum_x * sum_y) / 
-    (sqrt(quantity*sum_x_squared - sum_x * sum_x) * sqrt(quantity * sum_y_squared - sum_y * sum_y ));
+    (sqrt(quantity*sum_x_squared - sum_x * sum_x) * 
+     sqrt(quantity * sum_y_squared - sum_y * sum_y ));
 }
 
-void print_sums(double sum_x, double sum_y, double sum_x_squared, double sum_y_squared, double sum_xy){
+void print_sums(
+        double sum_x, double sum_y, double sum_x_squared, double sum_y_squared, double sum_xy){
     printf("The sum of X is: %f \n", sum_x);
     printf("The sum of Y is: %f \n", sum_y);
     printf("The sum of X^2 is: %f \n", sum_x_squared);
