@@ -87,7 +87,7 @@ This means that while the user was entering data manully, the scanf function did
 
 ```Error in opening file. ```
 
-This means that after the program tried to open the file provided as the second command line argument for inputing data with a CSV, the *file_pointer pointer was NULL. This may happen if the name provided for the CSV file does not exist or is not located in the same directory from whence the binary was launched.
+This means that after the program tried to open the file provided as the second command line argument for inputing data with a CSV file, the file_pointer pointer was NULL. This may happen if the name provided for the CSV file does not exist or is not located in the same directory from whence the binary was launched.
 
 ```Error in memory allocation. ```
 
@@ -103,7 +103,7 @@ This means that the data stored in the CSV file provided by the user was not for
 
 ```Error in creating file. ```
 
-This means that *filepointer was NULL after the program attempted to create the CSV file for exporting the data entered manually. 
+This means that filepointer was NULL after the program attempted to create the CSV file for exporting the data entered manually. 
 
 ## Installation
 To install this program, it is necessary to compile the .c file. 

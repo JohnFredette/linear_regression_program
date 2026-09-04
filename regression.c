@@ -131,7 +131,7 @@ int Manual_Data_Input(Coordinate **points) {
     int quantity;
     printf("How many data points? ");
     scanf("%d", &quantity);
-    if (quantity <= 1) {
+    if (quantity < 1) {
         printf("Not a valid amount \n");
         return -1;
     }
