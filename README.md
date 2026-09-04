@@ -125,8 +125,8 @@ $$
 \begin{aligned}
 &E = \sum_{k=1}^n [f(x_k) - \phi(x_k)]^2
 &E(m,b) = \sum_{k=1}^n [mx + b - y]^2
-$$
 \end{aligned}
+$$
 
 Where the function $E$ depends on $m$ and $b$, the coefficients of the line for which this program solves, and where $n$ is the number of data points.
 
@@ -186,13 +186,13 @@ After applying the inverse matrix to both sides of the equation the following st
 
 $$
 \begin{pmatrix}
-\m\\
-\b
+m\\
+b
 \end{pmatrix}
 =
 \frac{1}{n\sum{k=1}^n x^2 - (\sum{k=1}^n x)^2}
 \begin{pmatrix}
-\n & -\sum_{k=1}^n x \\
+n & -\sum_{k=1}^n x \\
 -\sum_{k=1}^n x & \sum{k=1}^n x^2
 \end{pmatrix}
 \begin{pmatrix}
@@ -205,13 +205,13 @@ After performing the Matrix times Vector product operation on the right side of 
 
 $$
 \begin{pmatrix}
-\m\\
-\b
+m\\
+b
 \end{pmatrix}
 =
 \frac{1}{n\sum{k=1}^n x^2 - (\sum{k=1}^n x)^2}
 \begin{pmatrix}
-\n\sum_{k=1}^n xy & -\sum_{k=1}^n x \sum_{k=1}^n y \\
+n\sum_{k=1}^n xy & -\sum_{k=1}^n x \sum_{k=1}^n y \\
 -\sum_{k=1}^n x \sum_{k=1}^n xy & \sum{k=1}^n x^2 \sum_{k=1}^n y
 \end{pmatrix}
 $$
