@@ -131,14 +131,14 @@ int Manual_Data_Input(Coordinate **points) {
     int quantity;
     printf("How many data points? ");
     scanf("%d", &quantity);
-    if (quantity < 1) {
+    if (quantity <= 1) {
         printf("Not a valid amount \n");
         return -1;
     }
 
     *points = malloc(quantity * sizeof(Coordinate));
     if (*points == NULL) { 
-        printf("Error in memory reallocation. \n");
+        printf("Error in memory allocation for manually entered data. \n");
         return -1;
     }
 
@@ -161,7 +161,7 @@ int CSV_Data_Input(char *filename, Coordinate **points) {
 
     *points = malloc(2 * sizeof(Coordinate));
     if (*points == NULL){
-        printf("Error in memory reallocation. \n");
+        printf("Error in memory allocation. \n");
         fclose(file_pointer);
         return -1;
     }
@@ -191,7 +191,7 @@ int CSV_Data_Input(char *filename, Coordinate **points) {
             break;
         }
         else{
-            printf("Bad data in CSV doc. \n");
+            printf("Bad data in CSV file. \n");
             fclose(file_pointer);
             return -1;
         }

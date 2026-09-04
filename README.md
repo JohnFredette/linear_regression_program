@@ -2,6 +2,8 @@
 To-do: 
 - Write documentation (readme)
 - Add stdbool.h and use true/false
+- If there is an error with scanf on line 148, the program should quit
+    or else implement a loop where the next time the user tries to input data it doesn't mess up the seuqence in the array. (eg. if only one data point got put into memory, the next one should over write it aka. no bad data should be writte) 
 - Parse input for csv export && check for .csv extension
 - check for argc > 2 (multiple .csv docs)
 - Improve memory managment (seperate into chunks) 
@@ -19,18 +21,18 @@ When run, the program presents the user options for printing to the console the 
 - The regression resuls (angular and linear coefficients aka. slope and intercept) 
 - Correlation coefficient
 
-Besides that, if data was entered manually, the program provies the user with the option to export the data to a .csv file.
+Besides that, if the data was entered manually, the program provies the user with the option to export the data to a .csv file.
 
 ## Usage
 As mentioned in the description, there are two methods for data entry with this program: csv and manual imput. 
 As the program flow is based on this initial choice, each method will be explained seperately. 
 
 ### CSV Data Entry
-To run the program with CSV data entry, the user must provide the name of the .csv file as the second command line argument when calling the program as follows: 
+To run the program with CSV data entry, the user must provide the name of the .csv file as the second command line argument when calling the program, as exemplified in the following command: 
 
 ```./a.out data.csv```
 
-The user will then be presented with the following options:
+The user is then presented with the following options:
 
 ```
 0 to Exit Program
@@ -45,9 +47,9 @@ If the user types 2 and then \<enter\>, the sums used the the regression formula
 If the user tyeps 3 and then \<enter\>, the angular and linear coeffients, also known as the slope and intercept, as well as the correlation coefficient are printed to the console.
 
 ### Manual Data Entry
-To run the program with manual data entry, the user need only to provide the name of the binary as a command line argument to lanuch the program.
+To run the program with manual data entry, the user need only provide the name of the binary as a command line argument to lanuch the program.
 
-Then, the user will be asked for the number of data points to be entered. After provding that number, the user will be prompted to provide each coordinate (x,y) of each data point separted by a space but with **NO** comma. The user should press \<enter\> after typing each data point as each point must be entered seperately. 
+After launch, the user is first asked for the number of data points to be entered. After provding that number, the user is prompted to provide each coordinate (x,y) of each data point separted by a space but with **NO** comma. The user should press \<enter\> after typing each data point as each point is expected to be entered seperately. 
 
 Once the manual data entry is complete, the user is presented with the following options:
 
@@ -59,19 +61,59 @@ Once the manual data entry is complete, the user is presented with the following
 4 to export manual input to CSV
 ```
 
-Options 0, 1, 2, and 3 function identically as they do when entering data via CSV. 
-If the user types 4 and then \<enter\>, the user is prompted to prove a name for the CSV file containing the data entered manually. The user is also reminded that that file should contain a .csv extension.
+Options 0 to 3 function identically as they do when entering data via CSV. 
+If the user types 4 and then \<enter\>, the user is prompted to prove a name for the CSV file to be exported containing the data entered manually. The user is also reminded that that file should contain a .csv extension.
 
 After providing a name for the .csv extension, the user is brought back to the main menu and presented witht the 4 options again.
+
+### Error Messages
+The creator of this program has coded error messages into the program so that in the event of any unexpected behaviour or a crash, the user can receive insight to the reason why.
+
+```Not a valid option. ```
+
+This means that the user has tried to select an option from the menu that is not avaliable.
+
+```Not a valid amount. ```
+
+This means that the user has tried to enter either 0 or a negative number for the quantity of data points.
+
+```Error in memory allocation for manually entered data. ```
+
+This means that after the user provided a quantity the program tried to allocate memory for that quantity of data points but that there was a memory allocation issue in which malloc() returned NULL.
+
+```Error with scanf. ```
+
+This means that while the user was entering data manully, the scanf function did not scan a total of 2 numbers of type "long float". This can occur if the user provies no numbers, one number, or more than 2 numbers. It might also occur if the entry is poorly formated. 
+
+```Error in opening file. ```
+
+This means that after the program tried to open the file provided as the second command line argument for inputing data with a CSV, the *file_pointer pointer was NULL. This may happen if the name provided for the CSV file does not exist or is not located in the same directory from whence the binary was launched.
+
+```Error in memory allocation. ```
+
+This means that during the first allocation of memory for the data during CSV data input, the pointer was NULL.
+
+```Error in memory reallocation. ```
+
+This means that at some point during the execution of the program, there was a memory allocation issue in which realloc() returned NULL.
+
+```Bad data in CSV file. ```
+
+This means that the data stored in the CSV file provided by the user was not formatted correctly. The most likely reason this may occur is due to the lack of a comma on the line from whence fscanf() is reading. It could also occur if there is either no, one, or more than 2 numbers on a line.
+
+```Error in creating file. ```
+
+This means that *filepointer was NULL after the program attempted to create the CSV file for exporting the data entered manually. 
 
 ## Installation
 To install this program, it is necessary to compile the .c file. 
 If using the gcc compiler, it may be necessary to link the math library (math.h) with the flag -lm as follows: 
 ``` gcc regression.c -lm ```
 
-The programmer has chosen to use the following command for comilation:
+The creator of this program has chosen to use the following command for comilation:
 
 ``` gcc -Wall -Wextra -g regression.c -o main -lm ```
+
 ## Derivation of Formulae
 
 ## Code Explaination
