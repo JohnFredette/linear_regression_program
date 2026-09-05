@@ -117,32 +117,25 @@ The creator of this program has chosen to use the following command for comilati
 ## Derivation of Formulae
 Linear regression works by finding the line that best fits the data by using the least squares method. The least squares method consists of minimizing the sum of the squares of the errors. The error for each data point is defined as the vertical seperation (distance) from the line. 
 
-Mathematically, one can say that given a set of data $\phi(x)$ where for a given x value, the function $\phi$ returns the y value for that data point, the linear function that best approximates that data is a function $f(x) = mx + b$ where $m$ is the angular coefficient/slope and $b$ is the linear coefficient/intercept.
+Mathematically, given a set of $n$ data points ($x_k$, $y_k$), where the function that relates the two coordinates of each datum is $y_k = \phi(x_k)$ for each $x_k$, where $k$ is the index of each point, the linear function that best approximates $\phi$ is a function $f(x) = mx + b$ where $m$ is the angular coefficient/slope and $b$ is the linear coefficient/intercept.
 
-Since the error for each data point is defined as the vertical distance between each data point and the line, the error is $|f(x) - \phi(x)|$. The least squares method requires the minimization of the sum of the squares of the error. Mathematically the function that must be minimized is: 
+Since the error for each data point is defined as the vertical distance between each data point and the line, the error is $|f(x_k) - \phi(x_k)|$. The least squares method requires the minimization of the sum of the squares of the error. Mathematically the function that must be minimized is: 
 
 $$
 \begin{aligned}
-&E = \sum_{k=1}^n [f(x_k) - \phi(x_k)]^2
-&E(m,b) = \sum_{k=1}^n [mx + b - y]^2
+E &= \sum_{k=1}^n [f(x_k) - \phi(x_k)]^2 \\
+E(m,b) &= \sum_{k=1}^n [mx_k + b - y_k]^2
 \end{aligned}
 $$
 
-Where the function $E$ depends on $m$ and $b$, the coefficients of the line for which this program solves, and where $n$ is the number of data points.
+Where the function $E$ depends on $m$ and $b$, the coefficients of the line f(x), and where $n$ is the number of data points.
 
-To minimize the function, the partial derivates with respect to the coefficients must be set equal to 0. 
-
-$$
-\begin{aligned}
-&\frac{\partial E}{\partial m} = 0
-&\frac{\partial E}{\partial b} = 0
-\end{aligned}
-$$
+To minimize the function, the partial derivates with respect to each of the coefficients must be set equal to 0. 
 
 $$
 \begin{aligned}
-&\frac{\partial E}{\partial m} = 2\sum_{k=1}^n [mx + b -y](x)
-&\frac{\partial E}{\partial b} = 2\sum_{k=1}^n [mx + b -y](1)
+&\frac{\partial E}{\partial m} = 2\sum_{k=1}^n [mx_k + b -y_k](x_k) = 0 \\
+&\frac{\partial E}{\partial b} = 2\sum_{k=1}^n [mx_k + b -y_k](1) = 0
 \end{aligned}
 $$
 
@@ -150,8 +143,8 @@ This results in the following system of linear equations:
 
 $$
 \begin{aligned}
-&\sum_{k=1}^n mx^2 + \sum_{k=1}^n bx - \sum_{k=1}^n xy = 0
-&\sum_{k=1}^n mx + \sum_{k=1}^n b - \sum_{k=1}^n y = 0
+&\sum_{k=1}^n mx_k^2 + \sum_{k=1}^n bx_k - \sum_{k=1}^n x_ky_k = 0 \\
+&\sum_{k=1}^n mx_k + \sum_{k=1}^n b - \sum_{k=1}^n y_k = 0
 \end{aligned}
 $$
 
@@ -159,69 +152,69 @@ Which simplifies to:
 
 $$
 \begin{aligned}
-&m\sum_{k=1}^n x^2 + b\sum_{k=1}^n x = \sum_{k=1}^n xy
-&m\sum_{k=1}^n x + bn = \sum_{k=1}^n y
+&m\sum_{k=1}^n x_k^2 + b\sum_{k=1}^n x_k = \sum_{k=1}^n x_ky_k \\
+&m\sum_{k=1}^n x_k + bn = \sum_{k=1}^n y_k
 \end{aligned}
 $$
 
-Which can be represented in Matrix form A$\vec{x}$ = b as: 
+Which can be represented in Matrix form (A $\vec{x} = b$) as: 
 
 $$
-\begin{pmatrix}
-\sum_{k=1}^n x^2 & \sum_{k=1}^n x \\
-\sum_{k=1}^n x & n
-\end{pmatrix}
-\begin{pmatrix}
+\begin{bmatrix}
+\sum_{k=1}^n x_k^2 & \sum_{k=1}^n x_k \\
+\sum_{k=1}^n x_k & n
+\end{bmatrix}
+\begin{bmatrix}
 m \\
 b
-\end{pmatrix}
+\end{bmatrix}
 =
-\begin{pmatrix}
-\sum_{k=1}^n xy\\
-\sum_{k=1}^n y
-\end{pmatrix}
+\begin{bmatrix}
+\sum_{k=1}^n x_ky_k\\
+\sum_{k=1}^n y_k
+\end{bmatrix}
 $$
 
-After applying the inverse matrix to both sides of the equation the following statemant can be made: 
+After applying the inverse matrix to both sides of the equation the following statement can be made: 
 
 $$
-\begin{pmatrix}
+\begin{bmatrix}
 m\\
 b
-\end{pmatrix}
+\end{bmatrix}
 =
-\frac{1}{n\sum{k=1}^n x^2 - (\sum{k=1}^n x)^2}
-\begin{pmatrix}
-n & -\sum_{k=1}^n x \\
--\sum_{k=1}^n x & \sum{k=1}^n x^2
-\end{pmatrix}
-\begin{pmatrix}
-\sum_{k=1}^n xy\\
-\sum_{k=1}^n y
-\end{pmatrix}
+\frac{1}{n\sum_{k=1}^n x_k^2 - (\sum_{k=1}^n x_k)^2}
+\begin{bmatrix}
+n & -\sum_{k=1}^n x_k \\
+-\sum_{k=1}^n x_k & \sum_{k=1}^n x_k^2
+\end{bmatrix}
+\begin{bmatrix}
+\sum_{k=1}^n x_ky_k\\
+\sum_{k=1}^n y_k
+\end{bmatrix}
 $$
 
-After performing the Matrix times Vector product operation on the right side of the quation:
+After performing the Matrix-Vector product operation on the right side of the equation one is left with:
 
 $$
-\begin{pmatrix}
+\begin{bmatrix}
 m\\
 b
-\end{pmatrix}
+\end{bmatrix}
 =
-\frac{1}{n\sum{k=1}^n x^2 - (\sum{k=1}^n x)^2}
-\begin{pmatrix}
-n\sum_{k=1}^n xy & -\sum_{k=1}^n x \sum_{k=1}^n y \\
--\sum_{k=1}^n x \sum_{k=1}^n xy & \sum{k=1}^n x^2 \sum_{k=1}^n y
-\end{pmatrix}
+\frac{1}{n\sum_{k=1}^n x_k^2 - (\sum_{k=1}^n x_k)^2}
+\begin{bmatrix}
+n\sum_{k=1}^n x_ky_k -\sum_{k=1}^n x_k \sum_{k=1}^n y_k \\
+\sum_{k=1}^n x_k^2 \sum_{k=1}^n y_k -\sum_{k=1}^n x_k \sum_{k=1}^n x_ky_k 
+\end{bmatrix}
 $$
 
 Which finally results in the expressions for the angular and linear coefficients of the line: 
 
 $$ 
 \begin{aligned}
-m = \frac{n\sum{k=1}^n xy - \sum{k=1}^n x \sum{k=1}^n y}{n\sum{k=1}^n x^2 - (\sum{k=1}^n x)^2}
-b = \frac{\sum{k=1}^n x^2 \sum{k=1}^n y - \sum{k=1}^n x \sum{k=1}^n xy}{n\sum{k=1}^n x^2 - (\sum{k=1}^n x)^2}
+m = \frac{n\sum_{k=1}^n x_ky_k - \sum_{k=1}^n x_k \sum_{k=1}^n y_k}{n\sum_{k=1}^n x_k^2 - (\sum_{k=1}^n x_k)^2} \\
+b = \frac{\sum_{k=1}^n x_k^2 \sum_{k=1}^n y_k - \sum_{k=1}^n x_k \sum_{k=1}^n x_ky_k}{n\sum_{k=1}^n x_k^2 - (\sum_{k=1}^n x_k)^2}
 \end{aligned}
 $$
 
