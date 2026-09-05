@@ -114,7 +114,7 @@ The creator of this program has chosen to use the following command for comilati
 
 ``` gcc -Wall -Wextra -g regression.c -o main -lm ```
 
-## Derivation of Formulae
+## Derivation of Formulae for Linear Regression
 Linear regression works by finding the line that best fits the data by using the least squares method. The least squares method consists of minimizing the sum of the squares of the errors. The error for each data point is defined as the vertical seperation (distance) from the line. 
 
 Mathematically, given a set of $n$ data points ($x_k$, $y_k$), where the function that relates the two coordinates of each datum is $y_k = \phi(x_k)$ for each $x_k$, where $k$ is the index of each point, the linear function that best approximates $\phi$ is a function $f(x) = mx + b$ where $m$ is the angular coefficient/slope and $b$ is the linear coefficient/intercept.
@@ -134,8 +134,8 @@ To minimize the function, the partial derivates with respect to each of the coef
 
 $$
 \begin{aligned}
-&\frac{\partial E}{\partial m} = 2\sum_{k=1}^n [mx_k + b -y_k](x_k) = 0 \\
-&\frac{\partial E}{\partial b} = 2\sum_{k=1}^n [mx_k + b -y_k](1) = 0
+&\frac{\partial E}{\partial m} = 2\sum_{k=1}^n (mx_k + b -y_k)(x_k) = 0 \\
+&\frac{\partial E}{\partial b} = 2\sum_{k=1}^n (mx_k + b -y_k)(1) = 0
 \end{aligned}
 $$
 
