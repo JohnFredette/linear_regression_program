@@ -121,7 +121,7 @@ Mathematically, given a set of $n$ data points ($x_k$, $y_k$), where the functio
 
 Since the error for each data point is defined as the vertical distance between each data point and the line, the error is $|f(x_k) - \phi(x_k)|$. The least squares method requires the minimization of the sum of the squares of the error. Mathematically the function that must be minimized is: 
 
-```
+```math
 \begin{aligned}
 E &= \sum_{k=1}^n [f(x_k) - \phi(x_k)]^2 \\
 E(m,b) &= \sum_{k=1}^n [mx_k + b - y_k]^2
@@ -132,7 +132,7 @@ Where the function $E$ depends on $m$ and $b$, the coefficients of the line $f(x
 
 To minimize the function, the partial derivates with respect to each of the coefficients must be set equal to 0. 
 
-```
+```math
 \begin{aligned}
 &\frac{\partial E}{\partial m} = 2\sum_{k=1}^n (mx_k + b -y_k)(x_k) = 0 \\
 &\frac{\partial E}{\partial b} = 2\sum_{k=1}^n (mx_k + b -y_k)(1) = 0
@@ -141,7 +141,7 @@ To minimize the function, the partial derivates with respect to each of the coef
 
 This results in the following system of linear equations: 
 
-```
+```math
 \begin{aligned}
 &\sum_{k=1}^n mx_k^2 + \sum_{k=1}^n bx_k - \sum_{k=1}^n x_ky_k = 0 \\
 &\sum_{k=1}^n mx_k + \sum_{k=1}^n b - \sum_{k=1}^n y_k = 0
@@ -150,7 +150,7 @@ This results in the following system of linear equations:
 
 Which simplifies to: 
 
-```
+```math
 \begin{aligned}
 &m\sum_{k=1}^n x_k^2 + b\sum_{k=1}^n x_k = \sum_{k=1}^n x_ky_k \\
 &m\sum_{k=1}^n x_k + bn = \sum_{k=1}^n y_k
@@ -159,7 +159,7 @@ Which simplifies to:
 
 Which can be represented in Matrix form (A $`\vec{x} = b`$) as: 
 
-```
+```math
 \begin{bmatrix}
 \sum_{k=1}^n x_k^2 & \sum_{k=1}^n x_k \\
 \sum_{k=1}^n x_k & n
@@ -177,7 +177,7 @@ b
 
 After applying the inverse matrix to both sides of the equation the following statement can be made: 
 
-```
+```math
 \begin{bmatrix}
 m\\
 b
@@ -196,7 +196,7 @@ n & -\sum_{k=1}^n x_k \\
 
 After performing the Matrix-Vector product operation on the right side of the equation one is left with:
 
-```
+```math
 \begin{bmatrix}
 m\\
 b
@@ -211,7 +211,7 @@ n\sum_{k=1}^n x_ky_k -\sum_{k=1}^n x_k \sum_{k=1}^n y_k \\
 
 Which finally results in the expressions for the angular and linear coefficients of the line: 
 
-``` 
+```math 
 \begin{aligned}
 m = \frac{n\sum_{k=1}^n x_ky_k - \sum_{k=1}^n x_k \sum_{k=1}^n y_k}{n\sum_{k=1}^n x_k^2 - (\sum_{k=1}^n x_k)^2} \\
 b = \frac{\sum_{k=1}^n x_k^2 \sum_{k=1}^n y_k - \sum_{k=1}^n x_k \sum_{k=1}^n x_ky_k}{n\sum_{k=1}^n x_k^2 - (\sum_{k=1}^n x_k)^2}
