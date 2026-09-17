@@ -211,3 +211,4 @@ b = \frac{\sum_{k=1}^n x_k^2 \sum_{k=1}^n y_k - \sum_{k=1}^n x_k \sum_{k=1}^n x_
 In the code, after all the data has been loaded into memory, each of the sums is calculated first, and the value for each is saved. Then the denominator is calculated separately, as it is the same for both coefficients. Then the final computation for each of the coefficients is made.
 
 ## Code Explaination
+Coming soon!
