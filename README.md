@@ -1,7 +1,5 @@
 # Linear Regression Program (CLI)
 To-do: 
-- Write documentation (readme)
-- Add stdbool.h and use true/false
 - Parse input for csv export && check for .csv extension
 - check for argc > 2 (multiple .csv docs)
 - Improve memory managment (seperate into chunks) 

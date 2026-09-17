@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdbool.h>
 
 typedef struct{
     double x;
@@ -67,7 +68,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    while (1){
+    while (true){
         printf("%d to Exit Program \n", EXIT_PROGRAM);
         printf("%d to print data\n", PRINT_DATA_TO_CONSOLE);
         printf("%d to print sums\n", PRINT_SUMS);
@@ -170,7 +171,7 @@ int CSV_Data_Input(char *filename, Coordinate **points) {
     int quantity = 0;
     int capacity = 2; 
 
-    while (1) {
+    while (true) {
         if (quantity == capacity){
             capacity = capacity*2;
             Coordinate *temp = realloc(*points, capacity * sizeof(Coordinate));
