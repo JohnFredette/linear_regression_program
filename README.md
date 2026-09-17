@@ -2,8 +2,6 @@
 To-do: 
 - Write documentation (readme)
 - Add stdbool.h and use true/false
-- If there is an error with scanf on line 148, the program should quit
-    or else implement a loop where the next time the user tries to input data it doesn't mess up the seuqence in the array. (eg. if only one data point got put into memory, the next one should over write it aka. no bad data should be writte) 
 - Parse input for csv export && check for .csv extension
 - check for argc > 2 (multiple .csv docs)
 - Improve memory managment (seperate into chunks) 
@@ -83,7 +81,7 @@ This means that after the user provided a quantity the program tried to allocate
 
 ```Error with scanf. ```
 
-This means that while the user was entering data manully, the scanf function did not scan a total of 2 numbers of type "long float". This can occur if the user provies no numbers, one number, or more than 2 numbers. It might also occur if the entry is poorly formated. 
+This means that while the user was entering data manully, the scanf function did not scan a total of 2 numbers of type "long float".
 
 ```Error in opening file. ```
 

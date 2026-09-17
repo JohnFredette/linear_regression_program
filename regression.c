@@ -146,6 +146,7 @@ int Manual_Data_Input(Coordinate **points) {
     for (int i = 0; i < quantity; i++){
         if (scanf("%lf %lf", &(*points)[i].x, &(*points)[i].y) != 2){
             printf("Error with scanf. \n");
+            return -1;
         }
     }
 
