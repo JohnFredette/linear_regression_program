@@ -1,20 +1,20 @@
 # Linear Regression Program (CLI)
 ## Description
-This linear regression program is a CLI-based tool, written in the C programming language, created to perform linear regression on a set of data given by 2 points eg. (x,y). 
+This linear regression program is a CLI-based tool, written in the C programming language, created to perform linear regression on a set of data given by 2 points, eg. (x,y). 
 
-The data entry can be done either automatically by providing a .csv file containing pairs of floating point data seperated by a comma or manually if no other command line argument (CLA) is provided. 
-Note that for .csv data entry to work properly, it's necessary that the .csv file be stored in the same directory from whence the binary was launched.
+The data entry can be done either automatically by providing a .csv file containing pairs of floating-point data separated by a comma or manually if no other command line argument (CLA) is provided. 
+Note that for .csv data entry to work properly, it's necessary that the .csv file be stored in the same directory from which the binary was launched.
 
 When run, the program presents the user options for printing to the console the following items:
 - The raw data
 - The sums used in the regression formulae
-- The regression resuls (angular and linear coefficients aka. slope and intercept) 
+- The regression results (angular and linear coefficients, aka slope and intercept) 
 - Correlation coefficient
 
-Besides that, if the data was entered manually, the program provies the user with the option to export the data to a .csv file.
+Besides that, if the data was entered manually, the program provides the user with the option to export the data to a .csv file.
 
 ## Usage
-As mentioned in the description, there are two methods for data entry with this program: csv and manual imput. 
+As mentioned in the description, there are two methods for data entry with this program: CSV and manual input. 
 As the program flow is based on this initial choice, each method will be explained seperately. 
 
 ### CSV Data Entry
@@ -52,12 +52,12 @@ Once the manual data entry is complete, the user is presented with the following
 ```
 
 Options 0 to 3 function identically as they do when entering data via CSV. 
-If the user types 4 and then \<enter\>, the user is prompted to prove a name for the CSV file to be exported containing the data entered manually. The user is also reminded that that file should contain a .csv extension.
+If the user types 4 and then \<enter\>, the user is prompted to provide a name for the CSV file to be exported containing the data entered manually. The user is also reminded that that file should contain a .csv extension.
 
-After providing a name for the .csv extension, the user is brought back to the main menu and presented witht the 4 options again.
+After providing a name for the .csv extension, the user is brought back to the main menu and presented with the 4 options again.
 
 ### Error Messages
-The creator of this program has coded error messages into the program so that in the event of any unexpected behaviour or a crash, the user can receive insight to the reason why.
+The creator of this program has coded error messages into the program so that in the event of any unexpected behavior or a crash, the user can receive insight into the reason why.
 
 ```Not a valid option. ```
 
@@ -73,11 +73,11 @@ This means that after the user provided a quantity the program tried to allocate
 
 ```Error with scanf. ```
 
-This means that while the user was entering data manully, the scanf function did not scan a total of 2 numbers of type "long float".
+This means that while the user was entering data manually, the scanf function did not scan a total of 2 numbers of type "long float".
 
 ```Error in opening file. ```
 
-This means that after the program tried to open the file provided as the second command line argument for inputing data with a CSV file, the file_pointer pointer was NULL. This may happen if the name provided for the CSV file does not exist or is not located in the same directory from whence the binary was launched.
+This means that after the program tried to open the file provided as the second command line argument for inputting data with a CSV file, the file_pointer pointer was NULL. This may happen if the name provided for the CSV file does not exist or is not located in the same directory from which the binary was launched.
 
 ```Error in memory allocation. ```
 
@@ -89,7 +89,7 @@ This means that at some point during the execution of the program, there was a m
 
 ```Bad data in CSV file. ```
 
-This means that the data stored in the CSV file provided by the user was not formatted correctly. The most likely reason this may occur is due to the lack of a comma on the line from whence fscanf() is reading. It could also occur if there is either no, one, or more than 2 numbers on a line.
+This means that the data stored in the CSV file provided by the user was not formatted correctly. The most likely reason this may occur is due to the lack of a comma on the line from whence fscanf() is reading. It could also occur if there are either no numbers, one number, or more than 2 numbers on a line.
 
 ```Error in creating file. ```
 
@@ -105,11 +105,11 @@ The creator of this program has chosen to use the following command for comilati
 ``` gcc -Wall -Wextra -g regression.c -o main -lm ```
 
 ## Derivation of Formulae for Linear Regression
-Linear regression works by finding the line that best fits the data by using the least squares method. The least squares method consists of minimizing the sum of the squares of the errors. The error for each data point is defined as the vertical seperation (distance) from the line. 
+Linear regression works by finding the line that best fits the data by using the least squares method. The least squares method consists of minimizing the sum of the squares of the errors. The error for each data point is defined as the vertical separation (distance) from the line. 
 
 Mathematically, given a set of $n$ data points ($x_k$, $y_k$), where the function that relates the two coordinates of each datum is $y_k = \phi(x_k)$ for each $x_k$, where $k$ is the index of each point, the linear function that best approximates $\phi$ is a function $f(x) = mx + b$ where $m$ is the angular coefficient/slope and $b$ is the linear coefficient/intercept.
 
-Since the error for each data point is defined as the vertical distance between each data point and the line, the error is $|f(x_k) - \phi(x_k)|$. The least squares method requires the minimization of the sum of the squares of the error. Mathematically the function that must be minimized is: 
+Since the error for each data point is defined as the vertical distance between each data point and the line, the error is $|f(x_k) - \phi(x_k)|$. The least squares method requires the minimization of the sum of the squares of the error. Mathematically, the function that must be minimized is: 
 
 ```math
 \begin{aligned}
@@ -120,7 +120,7 @@ E(m,b) &= \sum_{k=1}^n [mx_k + b - y_k]^2
 
 Where the function $E$ depends on $m$ and $b$, the coefficients of the line $f(x)$, and where $n$ is the number of data points.
 
-To minimize the function, the partial derivates with respect to each of the coefficients must be set equal to 0. 
+To minimize the function, the partial derivatives with respect to each of the coefficients must be set equal to 0. 
 
 ```math
 \begin{aligned}
@@ -147,7 +147,7 @@ Which simplifies to:
 \end{aligned}
 ```
 
-Which can be represented in Matrix form (A $`\vec{x} = b`$) as: 
+Which can be represented in matrix form (A $`\vec{x} = b`$) as: 
 
 ```math
 \begin{bmatrix}
@@ -165,7 +165,7 @@ b
 \end{bmatrix}
 ```
 
-After applying the inverse matrix to both sides of the equation the following statement can be made: 
+After applying the inverse matrix to both sides of the equation, the following statement can be made: 
 
 ```math
 \begin{bmatrix}
@@ -184,7 +184,7 @@ n & -\sum_{k=1}^n x_k \\
 \end{bmatrix}
 ```
 
-After performing the Matrix-Vector product operation on the right side of the equation one is left with:
+After performing the matrix-vector product operation on the right side of the equation, one is left with:
 
 ```math
 \begin{bmatrix}
@@ -208,6 +208,6 @@ b = \frac{\sum_{k=1}^n x_k^2 \sum_{k=1}^n y_k - \sum_{k=1}^n x_k \sum_{k=1}^n x_
 \end{aligned}
 ```
 
-In the code, after all the data has been loaded into memory, each of the sums is calculated first and the value for each is saved. Then the denominator is caculated seperately as it is the same for both coefficients. Then the final computation for each of the coefficients is made.
+In the code, after all the data has been loaded into memory, each of the sums is calculated first, and the value for each is saved. Then the denominator is calculated separately, as it is the same for both coefficients. Then the final computation for each of the coefficients is made.
 
 ## Code Explaination
