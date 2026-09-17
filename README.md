@@ -1,10 +1,4 @@
 # Linear Regression Program (CLI)
-To-do: 
-- Parse input for csv export && check for .csv extension
-- check for argc > 2 (multiple .csv docs)
-- Improve memory managment (seperate into chunks) 
-- Create function to export regression results
-
 ## Description
 This linear regression program is a CLI-based tool, written in the C programming language, created to perform linear regression on a set of data given by 2 points eg. (x,y). 
 
