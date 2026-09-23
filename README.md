@@ -98,6 +98,7 @@ This means that filepointer was NULL after the program attempted to create the C
 ## Build and run instructions
 ### Clone the repository
 git clone https://github.com/JohnFredette/linear_regression_program.git
+
 cd linear_regression_program
 
 ### Compile using GCC
