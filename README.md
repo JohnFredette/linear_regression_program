@@ -95,14 +95,16 @@ This means that the data stored in the CSV file provided by the user was not for
 
 This means that filepointer was NULL after the program attempted to create the CSV file for exporting the data entered manually. 
 
-## Installation
-To install this program, it is necessary to compile the .c file. 
-If using the gcc compiler, it may be necessary to link the math library (math.h) with the flag -lm as follows: 
-``` gcc regression.c -lm ```
+## Build and run instructions
+### Clone the repository
+git clone https://github.com/JohnFredette/linear_regression_program.git
+cd linear_regression_program
 
-The creator of this program has chosen to use the following command for compilation:
+### Compile using GCC
+gcc -Wall -extra -o regression main.c -lm
 
-``` gcc -Wall -Wextra -g regression.c -o main -lm ```
+### Run the executable
+./regression
 
 ## Derivation of Formulae for Linear Regression
 Linear regression works by finding the line that best fits the data by using the least squares method. The least squares method consists of minimizing the sum of the squares of the errors. The error for each data point is defined as the vertical separation (distance) from the line. 
