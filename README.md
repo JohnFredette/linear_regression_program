@@ -100,7 +100,7 @@ To install this program, it is necessary to compile the .c file.
 If using the gcc compiler, it may be necessary to link the math library (math.h) with the flag -lm as follows: 
 ``` gcc regression.c -lm ```
 
-The creator of this program has chosen to use the following command for comilation:
+The creator of this program has chosen to use the following command for compilation:
 
 ``` gcc -Wall -Wextra -g regression.c -o main -lm ```
 
